@@ -8,6 +8,8 @@ const endpoint = "https://striveschool-api.herokuapp.com/api/product/";
 const parameters = new URLSearchParams(location.search); // creo un oggetto con TUTTI i parametri in questo URL
 const biscuitId = parameters.get("biscuitId");
 
+
+
 class Biscuit {
   constructor(_name, _description, _brand, _imageUrl, _price) {
     this.name = _name;
