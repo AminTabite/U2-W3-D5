@@ -33,7 +33,7 @@ const getBiscuits = function () {
                 <h5 class="card-title">${biscotti.name}</h5>
                 <p class="card-text flex-grow-1">${biscotti.description}</p>
                 <p class="card-text">${biscotti.brand} - €${biscotti.price}</p>
-                <a href="./details.html?eventId=${biscotti._id}" class="btn btn-primary">Vai ai dettagli</a>
+                <a href="details.html?biscuitId=${biscotti._id}" class="btn btn-primary">Vai ai dettagli</a>
               </div>
             </div>
           </div>
