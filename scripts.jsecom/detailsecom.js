@@ -27,7 +27,7 @@ fetch(endpoint + "/" + biscuitId, {
   })
   .then((detailsbiscuits) => {
   console.log("dettagli", detailsbiscuits);
-  document.getElementById("spinner-container").classList.add("d-none");
+  
 
   // 1. Imposta l'immagine
   document.querySelector(".card-img-top").src = detailsbiscuits.imageUrl;
@@ -36,7 +36,7 @@ fetch(endpoint + "/" + biscuitId, {
   document.querySelector(".card-title").innerText = detailsbiscuits.name;
 
 // 3. descrizione
-  document.querySelector(".card-text.description").innerText = biscotto.description;
+  document.querySelector(".card-text.description").innerText = detailsbiscuits.description;
 
   // 3. Brand
   document.querySelector(".card-text.brand").innerText = detailsbiscuits.brand;

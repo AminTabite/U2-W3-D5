@@ -9,7 +9,7 @@ const parameters = new URLSearchParams(location.search); // creo un oggetto con 
 const biscuitId = parameters.get("biscuitId");
 
 class Biscuit {
-  constructor(_name, _description, _brand,_imageUrl, _price) {
+  constructor(_name, _description, _brand, _imageUrl, _price) {
     this.name = _name;
     this.description = _description;
     this.brand = _brand;
@@ -32,7 +32,7 @@ formBiscuits.addEventListener("submit", (e) => {
     descriptionInput.value,
     brandInput.value,
     "https://www.saporitipicilaziali.it/1957/biscotti-frolla-glassati-assortiti-vassoio-fantasia-1000g-fresco-ambient-scadenza-90gg-il-forno-di-gargani.jpg",
-    priceInput.value,
+    priceInput.value
   );
 
   console.log(fullBiscuit);
@@ -71,3 +71,34 @@ formBiscuits.addEventListener("submit", (e) => {
     }
   });
 });
+
+const deleteBiscotto = function () {
+  // con questa funzione chiedo all'API di eliminare questa risorsa
+  fetch(endpoint + "/" + biscuitId, {
+  method: "DELETE",         // metodo fuori da headers
+  headers: {
+    Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODc4YWRkNTYzZDk3MTAwMTUwZGY2MWQiLCJpYXQiOjE3NTI3MzkyODUsImV4cCI6MTc1Mzk0ODg4NX0.ksNBhJG5JWfSXzMJhRS54qyWSpL1i7vr38VYsTY0AT8"
+  }
+})
+
+.then((response) => {
+      if (response.ok) {
+        
+        alert("Rip biscotto");
+        // visto che la risorsa non esiste più, riportiamo l'utente in home
+        location.assign("/homepage.html");
+      } else {
+        throw new Error("Errore in fase di eliminazione");
+      }
+    })
+    .catch((err) => {
+      console.log("ERRORE", err);
+    });
+};
+
+
+const editBiscotto = function () {
+  // dobbiamo re-direzionare l'utente alla pagina backoffice con un parametro nell'URL
+  location.assign('/backoffice.html?biscuitId=' + biscuitId)
+
+}
