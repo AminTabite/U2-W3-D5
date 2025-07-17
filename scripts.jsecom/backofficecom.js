@@ -9,10 +9,11 @@ const parameters = new URLSearchParams(location.search); // creo un oggetto con 
 const biscuitId = parameters.get("biscuitId");
 
 class Biscuit {
-  constructor(_name, _description, _brand, _price) {
+  constructor(_name, _description, _brand,_imageUrl, _price) {
     this.name = _name;
     this.description = _description;
     this.brand = _brand;
+    this.imageUrl = _imageUrl;
     this.price = _price;
   }
 }
@@ -30,28 +31,43 @@ formBiscuits.addEventListener("submit", (e) => {
     nameInput.value, //tutti i valori che formano un oggetto biscotto grazie alla classe biscuit
     descriptionInput.value,
     brandInput.value,
-    priceInput.value
-  )
+    "https://www.saporitipicilaziali.it/1957/biscotti-frolla-glassati-assortiti-vassoio-fantasia-1000g-fresco-ambient-scadenza-90gg-il-forno-di-gargani.jpg",
+    priceInput.value,
+  );
 
-  console.log(fullBiscuit)
+  console.log(fullBiscuit);
 
-
-  let endpointToUse
+  let endpointToUse;
   if (biscuitId) {
     // abbiamo un ID nell'url, siamo qua per MODIFICARE un concerto!
-    endpointToUse = endpoint + '/' + biscuitId
+    endpointToUse = endpoint + "/" + biscuitId;
   } else {
     // NON abbiamo un ID nell'url., siamo qua per CREARE un concerto!
-    endpointToUse = endpoint
+    endpointToUse = endpoint;
   }
 
-  let methodToUse
+  let methodToUse;
   if (biscuitId) {
     // abbiamo un ID nell'url, siamo qua per MODIFICARE un concerto!
-    methodToUse = 'PUT'
+    methodToUse = "PUT";
   } else {
     // NON abbiamo un ID nell'url., siamo qua per CREARE un concerto!
-    methodToUse = 'POST'
+    methodToUse = "POST";
   }
 
+  fetch(endpointToUse, {
+    method: methodToUse, // es: 'POST' per creare una nuova risorsa
+    body: JSON.stringify(fullBiscuit), // converto l'oggetto JS in stringa JSON
+    headers: {
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODc4YWRkNTYzZDk3MTAwMTUwZGY2MWQiLCJpYXQiOjE3NTI3MzkyODUsImV4cCI6MTc1Mzk0ODg4NX0.ksNBhJG5JWfSXzMJhRS54qyWSpL1i7vr38VYsTY0AT8",
+      "Content-Type": "application/json", // indico che il body è in formato JSON
+    },
+  }).then((response) => {
+    if (response.ok) {
+      alert("Prodotto inserito correttamente!");
+    } else {
+      throw new Error("errore nel post", response.status);
+    }
+  });
 });

@@ -27,11 +27,11 @@ const getBiscuits = function () {
         row.innerHtml += `
             <div class="col">
               <div class="card h-100 d-flex flex-column">
-                <img src="https://www.saporitipicilaziali.it/1957/biscotti-frolla-glassati-assortiti-vassoio-fantasia-1000g-fresco-ambient-scadenza-90gg-il-forno-di-gargani.jpg" class="card-img-top" alt="immagine default concerto">
+                <img ${biscotti.} class="card-img-top" alt="biscotti">
                 <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">parametro1</h5>
-                  <p class="card-text flex-grow-1">parametro2</p>
-                  <p class="card-text">parametro3</p>
+                  <h5 class="card-title">${biscotti.name}</h5>
+                  <p class="card-text flex-grow-1">${biscotti.description}</p>
+                  <p class="card-text">${biscotti.brand} - ${biscotti.price}</p>
                   <a href="./detail.html?eventId= id biscotto" class="btn btn-primary">Vai ai dettagli</a>
                 </div>
               </div>
