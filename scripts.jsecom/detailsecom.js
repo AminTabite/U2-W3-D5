@@ -1,7 +1,4 @@
-
 const endpoint = "https://striveschool-api.herokuapp.com/api/product";
-
-
 
 const yearInFooter = function () {
   const span = document.getElementById("year");
@@ -9,7 +6,7 @@ const yearInFooter = function () {
 };
 
 console.log(location.search);
-const parameters = new URLSearchParams(location.search); // creo un oggetto con TUTTI i parametri in questo URL
+const parameters = new URLSearchParams(location.search); 
 const biscuitId = parameters.get("biscuitId");
 
 fetch(endpoint + "/" + biscuitId, {
@@ -26,41 +23,42 @@ fetch(endpoint + "/" + biscuitId, {
     }
   })
   .then((detailsbiscuits) => {
-  console.log("dettagli", detailsbiscuits);
+    console.log("dettagli", detailsbiscuits);
 
+    // prendo l'immagine
+    document.querySelector(".card-img-top").src = detailsbiscuits.imageUrl;
 
-  // 1. Imposta l'immagine
-  document.querySelector(".card-img-top").src = detailsbiscuits.imageUrl;
+    //  prendo nome
+    document.querySelector(".card-title").innerText = detailsbiscuits.name;
 
-  // 2. Imposta titolo
-  document.querySelector(".card-title").innerText = detailsbiscuits.name;
+    // prendo la descrizione
+    document.querySelector(".card-text.description").innerText =
+      detailsbiscuits.description;
 
-// 3.
-  document.querySelector(".card-text.description").innerText = detailsbiscuits.description;
+    //  prendo Brand
+    document.querySelector(".card-text.brand").innerText =
+      detailsbiscuits.brand;
 
-  // 3. Brand
-  document.querySelector(".card-text.brand").innerText = detailsbiscuits.brand;
-
-  // 4. Prezzo
-  document.querySelector(".card-text.price").innerText = detailsbiscuits.price + " €";
-})
-
-   .catch((err) => {
-    console.log('ERRORE', err)
+    //   prendo Prezzo
+    document.querySelector(".card-text.price").innerText =
+      detailsbiscuits.price + " €";
   })
 
-  const deleteBiscotto = function () {
-  // con questa funzione chiedo all'API di eliminare questa risorsa
-  fetch(endpoint + "/" + biscuitId, {
-  method: "DELETE",         // metodo fuori da headers
-  headers: {
-    Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODc4YWRkNTYzZDk3MTAwMTUwZGY2MWQiLCJpYXQiOjE3NTI3MzkyODUsImV4cCI6MTc1Mzk0ODg4NX0.ksNBhJG5JWfSXzMJhRS54qyWSpL1i7vr38VYsTY0AT8"
-  }
-})
+  .catch((err) => {
+    console.log("ERRORE", err);
+  });
 
-.then((response) => {
+const deleteBiscotto = function () {
+  //  mando request  all'API di eliminare questa risorsa
+  fetch(endpoint + "/" + biscuitId, {
+    method: "DELETE", 
+    headers: {
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODc4YWRkNTYzZDk3MTAwMTUwZGY2MWQiLCJpYXQiOjE3NTI3MzkyODUsImV4cCI6MTc1Mzk0ODg4NX0.ksNBhJG5JWfSXzMJhRS54qyWSpL1i7vr38VYsTY0AT8",
+    },
+  })
+    .then((response) => {
       if (response.ok) {
-        
         alert("Rip biscotto");
         // visto che la risorsa non esiste più, riportiamo l'utente in home
         location.assign("/homepage.html");
@@ -74,7 +72,9 @@ fetch(endpoint + "/" + biscuitId, {
 };
 
 const editBiscotto = function () {
-  // dobbiamo re-direzionare l'utente alla pagina backoffice con un parametro nell'URL
-  location.assign('/backoffice.html?biscuitId=' + biscuitId)
+  //direziona l'utente alla pagina backoffice con un parametro nell'URL per la modifica
+  location.assign("/backoffice.html?biscuitId=" + biscuitId);
+};
 
-}
+
+yearInFooter()

@@ -22,14 +22,14 @@ const getBiscuits = function () {
     .then((arrayOfBiscuits) => {
       console.log("array di biscotti:", arrayOfBiscuits);
 
-      const row = document.getElementById("Biscuits row");
+      const row = document.getElementById("Biscuits row");    //genero la colonna con i valori dell' oggetto delle card biscotto
 
       arrayOfBiscuits.forEach((biscotti) => {
         row.innerHTML += `
           <div class="col">
             <div class="card h-100 d-flex flex-column">
               <img src="${biscotti.imageUrl}" class="card-img-top" alt="biscotti">
-              <div class="card-body d-flex flex-column">
+              <div class="card-body d-flex flex-column bg-secondary text-light">
                 <h5 class="card-title">${biscotti.name}</h5>
                 <p class="card-text flex-grow-1">${biscotti.description}</p>
                 <p class="card-text">${biscotti.brand} - €${biscotti.price}</p>

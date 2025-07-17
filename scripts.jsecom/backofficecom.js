@@ -75,3 +75,4 @@ formBiscuits.addEventListener("submit", (e) => {
 });
 
 
+yearInFooter()
